@@ -1,7 +1,6 @@
 from Objetos.helper import buscar
 from Objetos.pedido import pedidos
 
-
 clientes = []
 
 def busca_cliente():
@@ -46,3 +45,4 @@ def pedido_cadastro_cliente():
     print('\nÉ necessário cadastrar um cliente \n')
     cliente = cadastro()
     pedidos(cliente)
+

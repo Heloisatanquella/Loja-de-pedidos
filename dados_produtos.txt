@@ -1,2 +1,3 @@
 Doritos|pra comer|12.0|20
 agua|pra tomar|3.0|9
+arroz|comida|8.0|8
