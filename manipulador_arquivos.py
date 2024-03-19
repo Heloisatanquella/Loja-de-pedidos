@@ -1,6 +1,6 @@
 from Objetos.cliente import clientes, Cliente
 from Objetos.produto import produtos, Produto
-from Objetos.pedido import lista_pedidos, Pedido
+from Objetos.pedido import lista_pedidos, Pedido, Item_Pedido
 
 #função de salvamento de todos os arquivos, que é chamada na main
 def save():
@@ -76,19 +76,17 @@ def read_pedido():
     for linha in linhas:
         pedido = {}
         dados = linha.split('|')
-        print(dados)
         cliente = dados[0]
         total_do_pedido = float(dados[1])
         produtos = []
 
         produtos_linha = dados[2].replace('\n', '').split('/')
         for linha_produto in produtos_linha:
-            produto = {}
             item = linha_produto.split(':')
-            produto['nome'] = item[0]
-            produto['quantidade'] = int(item[1])
-            produto['total'] = float(item[2])
- 
+            nome = item[0]
+            quantidade = int(item[1])
+            total = float(item[2])
+            produto = Item_Pedido(nome, quantidade, total)
             produtos.append(produto)
 
         pedido = Pedido(produtos, total_do_pedido, cliente)

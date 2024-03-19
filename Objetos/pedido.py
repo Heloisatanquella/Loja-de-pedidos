@@ -1,6 +1,19 @@
 from Objetos.produto import busca_produto
 lista_pedidos = []
 
+class Item_Pedido:
+
+    def __init__(self, nome, quantidade, total):
+        self.nome = nome
+        self.quantidade = quantidade
+        self.total = total
+
+    def dados_item(self):
+        print(f'\nItem: {self.nome} - Quantidade: {self.quantidade} - Total: R${self.total}')
+
+    def linha(self):
+        return f'{self.nome}:{self.quantidade}:{self.total}'
+
 class Pedido:
       
     def __init__(self, produtos, total_do_pedido, cliente):
@@ -9,18 +22,20 @@ class Pedido:
         self.cliente = cliente
 
     def dados_pedido(self):
-        print(f'\nProdutos adicionados ao pedido: {self.produtos}; Valor total do pedido: {self.total_do_pedido}; Comprador: {self.cliente}\n')
+        print(f'\nProdutos adicionados ao pedido:')
+        for produto in self.produtos:
+            if isinstance(produto, Item_Pedido):
+                produto.dados_item()
+        print(f'\nValor total do pedido: {self.total_do_pedido}; Comprador: {self.cliente}\n')
 
     def linha(self):
         produtos = []
 
         for item in self.produtos:
-            nome = item['nome']
-            quantidade = item['quantidade']
-            total = item['total']
-            produto_linha = f'{nome}:{quantidade}:{total}'
-            produtos.append(produto_linha)
+            if isinstance(item, Item_Pedido):
+                produtos.append(item.linha())
 
+#sublinha de itens do pedido
         produtos = '/'.join(produtos)
         return f'{self.cliente}|{self.total_do_pedido}|{produtos}\n'
 
@@ -58,7 +73,8 @@ def pedidos(cliente):
 
         item['total'] = produto.preco * item['quantidade']
         total_do_pedido = total_do_pedido + item['total']
-        produtos.append(item)
+        item_pedido = Item_Pedido(item['nome'], item['quantidade'], item['total'])
+        produtos.append(item_pedido)
     
         print('Cadastrar mais produtos? \n')
         print('1: Sim \n')
@@ -83,3 +99,15 @@ def pedidos(cliente):
             
             else:
                 print('\nApenas valores inteiros serão aceitos \n')
+
+#FIXME: resolver o problema abaixo
+# class Desenho:
+    
+#     def desenhar_quadrado(self):
+#         pass
+
+#     def desenhar_circulo(self):
+#         pass
+
+#     def desenhar_retangulo(self):
+#         pass

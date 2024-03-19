@@ -4,7 +4,6 @@ from Objetos.pedido import pedidos
 clientes = []
 
 class Cliente: #classe é o nosso objeto
-		#intrutor, (métodos)
     def __init__(self, nome, sobrenome, email, telefone): 
 				#self é o próprio objeto, e precisa estar no metódo
         self.nome = nome
@@ -15,6 +14,7 @@ class Cliente: #classe é o nosso objeto
     def dados_completos(self):
         print(f'\nNome completo: {self.nome} {self.sobrenome}; E-mail: {self.email}; Telefone: {self.telefone}\n')
 
+    #formata a classe para salvar no arquivo
     def linha(self):
         return f'{self.nome}|{self.sobrenome}|{self.email}|{self.telefone}\n'
 
